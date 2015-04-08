@@ -1,38 +1,66 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<header class="hero-unit" id="banner">
-  <div class="container">
-    <h1>'Allo, 'Allo!</h1>
-    <p class="lead">Kick-start your next web app with Angular Fullstack</p>
-    <img src="assets/images/yeoman.png" alt="I'm Yeoman">
-  </div>
-</header>
-
 <div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Features:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
-        <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}<button type="button" class="close" ng-click="deleteThing(thing)">&times;</button></a></li>
-      </ul>
+    <div class="lead-text">
+        Want to know where you stand compared to everyone else?
     </div>
-  </div>
-
-  <form class="thing-form">
-    <label>Syncs in realtime across clients</label>
-    <p class="input-group">
-      <input type="text" class="form-control" placeholder="Add a new thing here." ng-model="newThing">
-      <span class="input-group-btn">
-        <button type="submit" class="btn btn-primary" ng-click="addThing()">Add New</button>
-      </span>
-    </p>
-  </form>
+    <gaussian-normal></gaussian-normal>
+    <div ng-include="mainMessage"></div>
 </div>
 
 <footer class="footer">
   <div class="container">
-      <p>Angular Fullstack v2.0.13 |
-        <a href="https://twitter.com/tyhenkel">@tyhenkel</a> |
-         <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a></p>
+      <p>HowBigHowMany | copyright &copy; 2015 <a href="http://www.mimirate.com/">Mimirate, LLC </a>| <a href="mailto:info@mimirate.com">contact us</a></p>
   </div>
 </footer>
+
+<script type="text/ng-template" id="benchmark-added">
+    <div class="lead-text">
+        New benchmark added <a ng-href="{{newBenchmarkLink}}">here</a>.
+    </div>
+</script>
+
+<script type="text/ng-template" id="add-benchmark-form">
+    <form name="benchmarkForm" class="col-md-10 col-md-offset-1" ng-submit="createBenchmark(benchmarkForm)" novalidate>
+        <div class="form-group" ng-class="{ 'has-error':benchmarkForm.name.$invalid && !benchmarkForm.name.$pristine}">
+            <label class="main-form-label" for="">Benchmark Name</label>
+            <input required name="name" class="form-control" ng-model="newBenchmark.name" placeholder="e.g. -- Average hours of TV watched per day">
+        </div>
+        <div class="form-group" ng-class="{ 'has-error':benchmarkForm.prompt.$invalid && !benchmarkForm.prompt.$pristine}">
+            <label>Input Prompt</label>
+            <input required name="prompt" class="form-control" ng-model="newBenchmark.question" placeholder="e.g. -- How many hours of TV do you watch per day?">
+        </div>
+        <div class="form-group" ng-class="{ 'has-error':benchmarkForm.units.$invalid && !benchmarkForm.units.$pristine}">
+            <label class="main-form-label" for="">Benchmarking Units</label>
+            <input required name="units" class="form-control" ng-model="newBenchmark.units" placeholder="e.g. -- hours">
+        </div>
+        <div class="form-group" ng-class="{ 'has-error':benchmarkForm.description.$invalid && !benchmarkForm.description.$pristine}">
+            <label class="main-form-label">Description</label>
+            <textarea name="description" cols="30" rows="10" ng-model="newBenchmark.description" class="form-control" placeholder="Enter a brief description of your benchmark here."></textarea>
+            <p class="help-text">
+            Feel free to use HTML in your description. Markdown coming soon.
+            </p>
+        </div>
+        <div class="form-group">
+            <label class="main-form-label">Who can add data?</label>
+            <select name="whocanadd" ng-model="newBenchmark.whoCanAdd" class="form-control">
+                <option value='' ng-selected="newBenchmark.whoCanAdd===''">--Select Benchmark Visibility--</option>
+                <option value="anyone">Anyone</option>
+                <option value="invite">Invite Only</option>
+            </select>
+            <p class="help-text">
+                Set to 'Anyone' to list the benchmark publically. Set to 'Invite
+                Only' to only allow those with the URL to access the benchmark.
+            </p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error':benchmarkForm.minimum.$invalid && !benchmarkForm.minimum.$pristine}">
+            <label class="main-form-label">Minimum Value</label>
+            <input name="minimum" class="form-control" type="number" ng-model="newBenchmark.minimum">
+        </div>
+        <div class="form-group" ng-class="{ 'has-error':benchmarkForm.maximum.$invlaid && !benchmarkForm.maximum.$pristine}">
+            <label class="main-form-label">Maximum Value</label>
+            <input name="maximum" class="form-control" type="number" ng-model="newBenchmark.maximum">
+        </div>
+        <button ng-disabled="benchmarkForm.$invalid" class="btn btn-primary" type="submit">create</button>
+    </form>
+</script>

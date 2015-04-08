@@ -1,0 +1,45 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="lead-text">{{benchmark.name}}</div>
+<div class="created-by">Created by: {{benchmark.owner}}</div>
+<div class="container" ng-benchmark="benchmark">
+    <gaussian-normal user-number="userNumber" data="benchmark.data"></gaussian-normal>
+    <div ng-show="benchmark.data.length > 0" class="gaussian-action-buttons">
+        <button title="Download Image" class="btn btn-steelblue"><i class="fa fa-image"></i></button>
+        <button title="Download Data" class="btn btn-seagreen"><i class="fa fa-download"></i></button>
+        <button title="Share Benchmark" class="btn btn-tomato"><i class="fa fa-share"></i></button>
+    </div>
+    <div class="row">
+        <h5>&nbsp;</h5>
+    </div>
+</div>
+<hr class="mim-hr">
+<div class="container" ng-show="benchmark">
+    <div class="col-sm-8 col-sm-offset-2">
+    <form name="numberForm" ng-submit="submitNumber(numberForm)" novalidate>
+        <div class="form-group" ng-class="{ 'has-error':numberForm.userNumber.$invalid && !numberForm.userNumber.$pristine}">
+            <label>Your number 
+                <span ng-show="true">(between {{benchmark.minimum}} and {{benchmark.maximum}})</span> 
+            </label>
+            <input class="form-control" 
+                   type="number"
+                   ng-model="number" 
+                   ng-required="true"
+                   name="userNumber" 
+                   min="benchmark.minimum" 
+                   max="benchmark.maximum">
+            <span class="help-block" ng-show="numberForm.userNumber.$error.min || numberForm.userNumber.$error.max">
+                Your number must be between {{benchmark.minimum | number:0}} and {{benchmark.maximum | number:0}}
+            </span>
+        </div>
+        <button ng-disabled="numberForm.$invalid" type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    </div>
+</div>
+<hr>
+<div class="container">
+    <div class="col-sm-8 col-sm-offset-2">
+        <div class="benchmark-description" ng-bind-html="benchmark.description"></div>
+    </div>
+</div>
+

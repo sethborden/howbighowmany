@@ -1,25 +1,22 @@
-.thing-form {
-    margin: 20px 0;
+body {
+    background: linen;
 }
-
-#banner {
-    border-bottom: none;
-    margin-top: -20px;
-}
-
-#banner h1 {
-    font-size: 60px;
-    line-height: 1;
-    letter-spacing: -1px;
-}
-
-.hero-unit {
-    position: relative;
-    padding: 30px 15px;
-    color: #F5F5F5;
+.lead-text {
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: 800;
+    font-size: 24px;
+    letter-spacing: 0.1rem;
     text-align: center;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-    background: #4393B9;
+    text-transform: uppercase;
+}
+
+label {
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 0.1rem;
+    text-align: center;
+    text-transform: uppercase;
 }
 
 .footer {
@@ -28,3 +25,38 @@
     margin-top: 70px;
     border-top: 1px solid #E5E5E5;
 }
+
+.form-control {
+    background: rgba(246, 241, 237, 1);
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: 400;
+}
+
+button.btn {
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+button.btn-steelblue {
+    background: steelblue;
+    color: linen;
+}
+
+button.btn-seagreen {
+    background: seagreen;
+    color: linen;
+}
+
+button.btn-tomato {
+    background: tomato;
+    color: linen;
+}
+
+div.navbar {
+    background: rgba(242, 242, 234, 1);
+}
+
+
+

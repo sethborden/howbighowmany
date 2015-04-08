@@ -1,0 +1,64 @@
+li.benchmark-list-item {
+    border: 1px solid steelblue;
+    border-radius: 10px;
+    padding: 10px;
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    list-style-type: none;
+}
+
+li.benchmark-list-item:hover {
+    background: gainsboro;
+}
+
+
+div.created-by {
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: 0.1rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+div.benchmark-description {
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+p.help-text {
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: olive;
+    text-align: center;
+}
+
+div.gaussian-action-buttons {
+    margin-left: 80px;
+    margin-top: -40px;
+}
+
+hr.mim-hr {
+    padding: 0;
+    border: none;
+    border-top: medium double steelblue;
+    color: steelblue;
+    width: 60%;
+    text-align: center;
+}
+
+hr.mim-hr:after {
+    font-family: "Source Sans Pro", sans-serif;
+    content: '§';
+    background: linen;
+    display: inline-block;
+    position: relative;
+    top: -0.8em;
+    font-size: 1.2em;
+    padding: 0 0 2.5em;
+}

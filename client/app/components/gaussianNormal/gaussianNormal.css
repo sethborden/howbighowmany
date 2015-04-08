@@ -1,0 +1,73 @@
+gaussian-normal {
+    cursor: e-resize;
+}
+
+.background {
+    fill: #CDDEE6;
+}
+.mean {
+    stroke: steelblue;
+    stroke-width: 5;
+}
+
+.user {
+    stroke: tomato;
+    stroke-width: 5;
+}
+
+.user-circle {
+    stroke: none;
+    fill: tomato;
+}
+
+.bar {
+    fill: #EEEEEE;
+    stroke-width: 2;
+    stroke-color: #EEEEEE;
+}
+
+.line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 5px;
+}
+
+.axis path, .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.axis {
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    letter-spacing: 0.3rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.mouse-circle {
+    stroke: none;
+    fill: steelblue;
+}
+
+.label {
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 0.3rem;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 10px 0 0 0;
+}
+
+.user-text {
+    fill: tomato;
+}
+
+.mean-text {
+    fill: steelblue;
+}
+
+

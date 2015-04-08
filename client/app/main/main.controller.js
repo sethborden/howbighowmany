@@ -1,27 +1,21 @@
 'use strict';
 
 angular.module('howbighowmanyApp')
-  .controller('MainCtrl', function ($scope, $http, socket) {
-    $scope.awesomeThings = [];
+.controller('MainCtrl', function ($http, $scope) {
+    $scope.newBenchmark = {
+        minimum: 0,
+        maximum: 100
+    };
+    $scope.mainMessage = 'add-benchmark-form';
 
-    $http.get('/api/things').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings;
-      socket.syncUpdates('thing', $scope.awesomeThings);
-    });
-
-    $scope.addThing = function() {
-      if($scope.newThing === '') {
-        return;
-      }
-      $http.post('/api/things', { name: $scope.newThing });
-      $scope.newThing = '';
+    $scope.createBenchmark = function(form) {
+        if(form.$valid) {
+            $http.post('/api/benchmarks', $scope.newBenchmark)
+            .success(function(res) {
+                $scope.mainMessage = 'benchmark-added';
+                $scope.newBenchmarkLink = '/benchmark/' + res._id;
+            });
+        }
     };
 
-    $scope.deleteThing = function(thing) {
-      $http.delete('/api/things/' + thing._id);
-    };
-
-    $scope.$on('$destroy', function () {
-      socket.unsyncUpdates('thing');
-    });
-  });
+});

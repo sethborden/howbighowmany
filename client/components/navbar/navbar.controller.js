@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('howbighowmanyApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth) {
-    $scope.menu = [{
-      'title': 'Home',
-      'link': '/'
-    }];
+.controller('NavbarCtrl', function ($scope, $location, Auth) {
+    $scope.menu = [
+        {'title': 'Home', 'link': '/'},
+        {'title': 'Benchmarks', 'link': '/benchmark'}
+    ];
 
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
@@ -13,11 +13,11 @@ angular.module('howbighowmanyApp')
     $scope.getCurrentUser = Auth.getCurrentUser;
 
     $scope.logout = function() {
-      Auth.logout();
-      $location.path('/login');
+        Auth.logout();
+        $location.path('/login');
     };
 
     $scope.isActive = function(route) {
-      return route === $location.path();
+        return route === $location.path();
     };
-  });
+});
