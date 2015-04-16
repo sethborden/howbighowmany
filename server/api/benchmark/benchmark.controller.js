@@ -13,10 +13,9 @@ exports.index = function(req, res) {
 
 // Get list of 50 latest benchmarks
 exports.indexLatest = function(req, res) {
-    var query = Benchmark.find().select({'name': 1, 'owner': 1, '_id': 1});
+    var query = Benchmark.find({'whoCanAdd': 'anyone'}).select({'name': 1, 'owner': 1, '_id': 1});
     query.exec(function (err, benchmarks) {
         if (err) { return handleError(res, err); }
-        console.log(benchmarks);
         return res.json(200, benchmarks);
     });
 }
@@ -45,7 +44,6 @@ exports.addNumberToBenchmark = function(req, res) {
         if(!benchmark) { return res.send(404); }
         benchmark.data.push(Number(req.body.number));
         benchmark.save(function(err) {
-            console.log(benchmark);
             if (err) { return handleError(res, err); }
             return res.json(200, benchmark);
         });

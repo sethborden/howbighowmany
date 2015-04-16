@@ -3,11 +3,17 @@
 <div class="lead-text">{{benchmark.name}}</div>
 <div class="created-by">Created by: {{benchmark.owner}}</div>
 <div class="container" ng-benchmark="benchmark">
-    <gaussian-normal user-number="userNumber" data="benchmark.data"></gaussian-normal>
+    <gaussian-normal units="benchmark.units" user-number="userNumber" data="benchmark.data"></gaussian-normal>
     <div ng-show="benchmark.data.length > 0" class="gaussian-action-buttons">
-        <button title="Download Image" class="btn btn-steelblue"><i class="fa fa-image"></i></button>
-        <button title="Download Data" class="btn btn-seagreen"><i class="fa fa-download"></i></button>
-        <button title="Share Benchmark" class="btn btn-tomato"><i class="fa fa-share"></i></button>
+        <button title="Download Image" class="btn btn-steelblue" onClick="_gaq.push(['_trackEvent', 'Button', 'Click', 'Download Image']})">
+            <i class="fa fa-image"></i>
+        </button>
+        <button title="Download Data" class="btn btn-seagreen" onClick="_gaq.push(['_trackEvent', 'Button', 'Click', 'Download Data']})">
+            <i class="fa fa-download"> </i>
+        </button>
+        <button title="Share Benchmark" class="btn btn-tomato" onClick="_gaq.push(['_trackEvent', 'Button', 'Click', 'Share']})">
+            <i class="fa fa-share"></i>
+        </button>
     </div>
     <div class="row">
         <h5>&nbsp;</h5>
@@ -18,16 +24,19 @@
     <div class="col-sm-8 col-sm-offset-2">
     <form name="numberForm" ng-submit="submitNumber(numberForm)" novalidate>
         <div class="form-group" ng-class="{ 'has-error':numberForm.userNumber.$invalid && !numberForm.userNumber.$pristine}">
-            <label>Your number 
+            <label>{{benchmark.question}}
                 <span ng-show="true">(between {{benchmark.minimum}} and {{benchmark.maximum}})</span> 
             </label>
-            <input class="form-control" 
-                   type="number"
-                   ng-model="number" 
-                   ng-required="true"
-                   name="userNumber" 
-                   min="benchmark.minimum" 
-                   max="benchmark.maximum">
+            <div class="input-group">
+                <input class="form-control" 
+                       type="number"
+                       name="userNumber" 
+                       ng-model="number" 
+                       ng-required="true"
+                       min="{{benchmark.minimum}}" 
+                       max="{{benchmark.maximum}}">
+                <div class="input-group-addon">{{benchmark.units}}</div>
+            </div>
             <span class="help-block" ng-show="numberForm.userNumber.$error.min || numberForm.userNumber.$error.max">
                 Your number must be between {{benchmark.minimum | number:0}} and {{benchmark.maximum | number:0}}
             </span>
@@ -36,10 +45,42 @@
     </form>
     </div>
 </div>
-<hr>
 <div class="container">
     <div class="col-sm-8 col-sm-offset-2">
         <div class="benchmark-description" ng-bind-html="benchmark.description"></div>
     </div>
 </div>
-
+<hr class="mim-hr">
+<div ng-show="benchmark.commentsAllowed" id="comment-container">
+    <div class="container" style="text-align:center;">
+        <button class="btn btn-seagreen" ng-click="showComments = !showComments">
+            <span ng-show="!showComments">show</span> 
+            <span ng-show="showComments">hide</span> 
+            comments
+        </button>
+    </div>
+    <div ng-animate ng-show="showComments" class="container" id="disqus_thread"></div>
+    <script type="text/javascript">
+        $(document).on('benchmark-loaded', function() {
+            /* * * CONFIGURATION VARIABLES * * */
+            var benchmark = angular.element($('gaussian-normal')).scope().benchmark;
+            var disqus_shortname = 'howbighowmany';
+            var disqus_identifier = 'howbighowmany-benchmark-' + benchmark._id;
+            console.log(benchmark);
+            var disqus_title = benchmark.name;
+            
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        });
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</div>
+<footer class="footer">
+  <div class="container">
+      <p>HowBigHowMany | copyright &copy; 2015 <a href="http://www.mimirate.com/">Mimirate, LLC </a>| <a href="mailto:info@mimirate.com">contact us</a></p>
+  </div>
+</footer>

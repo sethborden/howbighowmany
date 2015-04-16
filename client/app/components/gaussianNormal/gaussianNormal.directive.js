@@ -6,7 +6,8 @@ angular.module('howbighowmanyApp')
     restrict: 'EA',
     scope: {
         data: '=',
-        userNumber: '='
+        userNumber: '=',
+        units: '&'
     },
     link: function (scope, element, attrs) {
         //Utility function to generate random float > 0
@@ -84,7 +85,7 @@ angular.module('howbighowmanyApp')
 
             var margins = {
                 top: 20,
-                right: 80,
+                right: 90,
                 bottom: 80,
                 left: 80,
                 labelsRight: 15
@@ -106,7 +107,7 @@ angular.module('howbighowmanyApp')
 
             var xAxis = d3.svg.axis().scale(xScale).orient('bottom').outerTickSize(0);
             var xTopAxis = d3.svg.axis().scale(xScale).orient('top').tickFormat('').outerTickSize(0).innerTickSize(0);
-            var yAxis = d3.svg.axis().scale(yScale).orient('right').tickFormat(d3.format('%')).outerTickSize(0);
+            var yAxis = d3.svg.axis().scale(yScale).orient('right').tickFormat(d3.format('.1%')).outerTickSize(0);
             var yBarAxis = d3.svg.axis().scale(yBarScale).orient('left').outerTickSize(0);
 
             xScale.domain(d3.extent(normData, function(d) { return Math.max(0,d.x); }));
@@ -191,7 +192,7 @@ angular.module('howbighowmanyApp')
                .attr('text-anchor', 'middle')
                .attr('x', width / 2)
                .attr('y', height + 40)
-               .text('values');
+               .text(scope.units);
 
             //Draw the bar y-axis
             svg.append('g')
@@ -217,9 +218,9 @@ angular.module('howbighowmanyApp')
             svg.append('text')
                .attr('class', 'label')
                .attr('text-anchor', 'middle')
-               .attr('x', width + 60)
+               .attr('x', width + 70)
                .attr('y', height / 2)
-               .attr('transform', 'rotate(90 ' +  (width + 60) + ',' + (height / 2) + ')')
+               .attr('transform', 'rotate(90 ' +  (width + 70) + ',' + (height / 2) + ')')
                .text('percentage');
 
             //Draw in the top axis for completeness

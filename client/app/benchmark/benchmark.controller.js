@@ -3,11 +3,13 @@
 angular.module('howbighowmanyApp')
 .controller('BenchmarkCtrl', function ($stateParams, $http, $scope) {
     $scope.userNumber = null;
+    $scope.showComments = false;
 
     if ($stateParams.benchmarkId) {
         $http.get('/api/benchmarks/' + $stateParams.benchmarkId)
         .success(function(res) {
             $scope.benchmark = res;
+            $(document).trigger('benchmark-loaded');
         });
     } else {
         $http.get('/api/benchmarks/')

@@ -4,7 +4,8 @@ angular.module('howbighowmanyApp')
 .controller('MainCtrl', function ($http, $scope) {
     $scope.newBenchmark = {
         minimum: 0,
-        maximum: 100
+        maximum: 100,
+        allowComments: true
     };
     $scope.mainMessage = 'add-benchmark-form';
 
@@ -17,5 +18,4 @@ angular.module('howbighowmanyApp')
             });
         }
     };
-
 });
