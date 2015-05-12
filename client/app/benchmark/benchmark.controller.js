@@ -1,9 +1,15 @@
 'use strict';
 
 angular.module('howbighowmanyApp')
-.controller('BenchmarkCtrl', function ($stateParams, $http, $scope) {
+.controller('BenchmarkCtrl', function (svgUtilService, $stateParams, $http, $scope) {
     $scope.userNumber = null;
     $scope.showComments = false;
+
+    $scope.downloadSVG = function() {
+        var output = svgUtilService.fileize($('gaussian-normal > svg')[0]);
+        window
+        console.log(output);
+    };
 
     if ($stateParams.benchmarkId) {
         $http.get('/api/benchmarks/' + $stateParams.benchmarkId)

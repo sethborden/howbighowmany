@@ -136,6 +136,7 @@ angular.module('howbighowmanyApp')
             //Draw in the background
             svg.append('rect')
                 .attr('class', 'background')
+                .attr('fill', '#CDDEE6')
                 .attr('width', width)
                 .attr('height', height);
             
@@ -145,6 +146,9 @@ angular.module('howbighowmanyApp')
                .enter()
                .append('rect')
                .attr('class', 'bar')
+               .attr('fill', '#EEEEEE')
+               .attr('stroke-width', '2')
+               .attr('stroke-color', '#EEEEEE')
                .attr('x', function(d, i) { return (i * barWidth); })
                .attr('y', function(d) { return yBarScale(d); })
                .attr('height', function(d) { return height - yBarScale(d); })
@@ -153,6 +157,8 @@ angular.module('howbighowmanyApp')
             //Draw in the mean line
             svg.append('line')
                 .attr('class', 'mean')
+                .attr('stroke', 'steelblue')
+                .attr('stroke-width', '5')
                 .attr('y1', 0)
                 .attr('y2', height)
                 .attr('x1', xScale(mean(data)))
@@ -178,6 +184,9 @@ angular.module('howbighowmanyApp')
             svg.append('path')
                .datum(normData)
                .attr('class', 'line')
+               .attr('fill', 'none')
+               .attr('stroke', 'steelblue')
+               .attr('stroke-width', '5')
                .attr('d', line);
 
             //Draw the x-axis
@@ -232,6 +241,8 @@ angular.module('howbighowmanyApp')
             if (scope.userNumber) {
                 svg.append('circle')
                    .attr('class', 'user-circle')
+                   .attr('stroke', 'none')
+                   .attr('fill', 'tomato')
                    .attr('r', 15)
                    .attr('cx', xScale(Number(scope.userNumber)))
                    .attr('cy', yScale(bellCurve(Number(scope.userNumber), mean(data), stddev(data))));
@@ -241,6 +252,8 @@ angular.module('howbighowmanyApp')
             if (scope.userNumber) {
                 svg.append('line')
                     .attr('class', 'user')
+                    .attr('stroke', 'tomato')
+                    .attr('stroke-width', '5')
                     .attr('y1', 0)
                     .attr('y2', height)
                     .attr('x1', xScale(scope.userNumber))
@@ -274,6 +287,14 @@ angular.module('howbighowmanyApp')
                .append('tspan')
                .attr('class', 'mouse-text-current')
                .text('0.00');
+
+            svg.selectAll('.axis')
+               .attr('font-family', '"Source Sans Pro", sans-serif')
+               .attr('font-weight', '400')
+               .attr('font-size', '18px')
+               .attr('letter-spacing', '0.3rem')
+               .attr('text-align', 'center')
+               .attr('text-transform', 'uppercanse');
 
 
             var gNorm = element[0];
