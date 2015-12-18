@@ -6,9 +6,31 @@ angular.module('howbighowmanyApp')
     $scope.showComments = false;
 
     $scope.downloadSVG = function() {
-        var output = svgUtilService.fileize($('gaussian-normal > svg')[0]);
-        window
-        console.log(output);
+        var image;
+        var link = document.createElement('a');
+        var canvas = document.createElement('canvas');
+        var svg = svgUtilService.fileize($('gaussian-normal > svg')[0]);
+        canvas.setAttribute('width', $('gaussian-normal > svg').width());
+        canvas.setAttribute('height', $('gaussian-normal > svg').height());
+        canvg(canvas, svg); //jshint ignore:line
+
+        image = canvas.toDataURL('image/png');
+
+        link.setAttribute('href', image);
+        link.setAttribute('download', $scope.benchmark.name + '.png');
+        link.click();
+    };
+
+    $scope.downloadCSV = function() {
+        var link = document.createElement('a');
+        var output = 'data:text/csv;charset=utf-8,';
+        $scope.benchmark.data.forEach(function(row, i) {
+            output += [i, row, '\n'].join(',');  
+        });
+        output = encodeURI(output);
+        link.setAttribute('href', output);
+        link.setAttribute('download', 'howbighowmany.csv');
+        link.click();
     };
 
     if ($stateParams.benchmarkId) {

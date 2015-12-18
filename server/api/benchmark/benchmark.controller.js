@@ -76,6 +76,14 @@ exports.destroy = function(req, res) {
     });
 };
 
+//Not a benchmark thing, but returns an SVG file when the SVG data is posted
+exports.renderSVG = function(req, res) {
+    res.setHeader('Content-Disposition', 'attachment; filename=' + req.body.name);
+    res.setHeader('Content-Type', 'image/svg+xml');
+    res.write(req.body.blob);
+    return res.end();
+};
+
 function handleError(res, err) {
     return res.send(500, err);
 }

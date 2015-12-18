@@ -8,6 +8,7 @@ var router = express.Router();
 router.get('/', controller.indexLatest);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
+router.post('/render', controller.renderSVG);
 router.post('/:id', controller.addNumberToBenchmark);
 router.put('/:id', controller.update);
 router.patch('/:id', controller.update);

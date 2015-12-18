@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('howbighowmanyApp')
-.directive('gaussianNormal', function ($timeout) {
+.directive('gaussianNormal', function () {
     return {
     restrict: 'EA',
     scope: {
@@ -10,6 +10,11 @@ angular.module('howbighowmanyApp')
         units: '&'
     },
     link: function (scope, element, attrs) {
+        if(attrs.data === undefined) {
+            console.log(attrs.data, 'is undefined');
+            delete attrs.data;
+        }
+
         //Utility function to generate random float > 0
         var randomFloat = function(max) {
             return Math.random() * max;

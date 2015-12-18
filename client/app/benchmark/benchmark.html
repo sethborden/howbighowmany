@@ -5,14 +5,11 @@
 <div class="container" ng-benchmark="benchmark">
     <gaussian-normal units="benchmark.units" user-number="userNumber" data="benchmark.data"></gaussian-normal>
     <div ng-show="benchmark.data.length > 0" class="gaussian-action-buttons">
-        <button title="Download Image" class="btn btn-steelblue" onClick="_gaq.push(['_trackEvent', 'Button', 'Click', 'Download Image']})">
+        <button title="Download Image" class="btn btn-steelblue" onClick="_gaq.push(['_trackEvent', 'Button', 'Click', 'Download Image']})" ng-click="downloadSVG()">
             <i class="fa fa-image"></i>
         </button>
-        <a title="Download Data" class="btn btn-seagreen" ng-click="downloadSVG()">
+        <button title="Download Data" class="btn btn-seagreen" ng-click="downloadCSV()">
             <i class="fa fa-download"></i>
-        </a>
-        <button title="Share Benchmark" class="btn btn-tomato" onClick="_gaq.push(['_trackEvent', 'Button', 'Click', 'Share']})">
-            <i class="fa fa-share"></i>
         </button>
     </div>
     <div class="row">
@@ -66,7 +63,6 @@
             var benchmark = angular.element($('gaussian-normal')).scope().benchmark;
             var disqus_shortname = 'howbighowmany';
             var disqus_identifier = 'howbighowmany-benchmark-' + benchmark._id;
-            console.log(benchmark);
             var disqus_title = benchmark.name;
             
             /* * * DON'T EDIT BELOW THIS LINE * * */
